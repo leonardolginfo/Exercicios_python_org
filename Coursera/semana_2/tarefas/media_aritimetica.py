@@ -1,0 +1,1 @@
+nota1 = flot(input("Digite a primeira nota:"))
