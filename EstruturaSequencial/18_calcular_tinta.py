@@ -18,39 +18,59 @@ PRECO_LATA = 80
 PRECO_GALAO = 25
 COBERTURA_METROS_LITRO = 6
 
-quantidade_galao_final_arredondada = 0
-quantidade_lata_final_arredondada = 0
-
-quantidade_galao_sem_arredondar = 0
-quantidade_lata_sem_arredondar = 0
-
-desperdicio_galao = 0
-deperdicio_lata = 0
-
-custo_compra_galoes = 0
-custo_compras_latas = 0
-
 metros_pintar = float(input("Quantos metros quadrados serão pintados? "))
 
 QUANTIDADE_LITROS_NECESSARIOS = metros_pintar * COBERTURA_METROS_LITRO
 
 quantidade_galao_sem_arredondar = QUANTIDADE_LITROS_NECESSARIOS / GALAO_TINTA_LITROS
+quantidade_lata_sem_arredondar = QUANTIDADE_LITROS_NECESSARIOS / LATA_TINTA_LITROS
 
 custo_compra_galoes = quantidade_galao_sem_arredondar * PRECO_GALAO
+custo_compras_latas = quantidade_lata_sem_arredondar * PRECO_LATA
 
-print("Para pintar ", metros_pintar , "m2")
+#eh_int_lata = isinstance( quantidade_lata_sem_arredondar, int) or (isinstance(quantidade_lata_sem_arredondar, float) and quantidade_lata_sem_arredondar.is_integer())
+print("Latas " , quantidade_lata_sem_arredondar)
+print("Litros: ", quantidade_lata_sem_arredondar * LATA_TINTA_LITROS)
+
+eh_int_lata = quantidade_lata_sem_arredondar.is_integer()
+
+
+if eh_int_lata:
+    print("*********INT**********")
+    print("Para pintar ", metros_pintar , "m2")
+    print("Usando somente LATAS de 18 L :")
+    print("Latas: " , quantidade_lata_sem_arredondar)
+    print("Litros ",(quantidade_lata_sem_arredondar * LATA_TINTA_LITROS))
+    print("Valor gasto com galões: R$", custo_compras_latas)
+    
+else:
+    print("***********float**************")
+    quantidade_lata_final_arredondada = math.ceil(quantidade_lata_sem_arredondar)    
+    desperdicio_lata = ((quantidade_lata_final_arredondada * LATA_TINTA_LITROS)-(quantidade_lata_sem_arredondar * LATA_TINTA_LITROS))
+    print("Usando somente LATAS de 18 L :")
+    print("Latas: " , quantidade_lata_final_arredondada)
+    print("Litros ",(quantidade_lata_final_arredondada * LATA_TINTA_LITROS))
+    print("Valor gasto com galões: R$" , custo_compras_latas)
+    print("Desperdício de tinta é de: ", desperdicio_lata)    
+    
+    
+    
+'''
 if isinstance( quantidade_galao_sem_arredondar, int):
     print("Usando somente galões de 3.6 L :")
     print("Quantidade de galões necesarios: " , quantidade_galao_sem_arredondar)
+    print("Serão necessarios ",(quantidade_galao_sem_arredondar * GALAO_TINTA_LITROS ))
     print("Valor gasto com galões: " , custo_compra_galoes)
-    
 else:
     quantidade_galao_final_arredondada = math.ceil(quantidade_galao_sem_arredondar)    
     desperdicio_galao = quantidade_galao_final_arredondada - quantidade_galao_sem_arredondar
+    print("float")
     print("Usando somente galões de 3.6 L :")
     print("Quantidade de galões necesarios: " ,  quantidade_galao_final_arredondada)
+    print("Serão necessarios ",(quantidade_galao_final_arredondada * GALAO_TINTA_LITROS ), " L")
     print("Valor gasto com galões: " , custo_compra_galoes)
     print("Desperdício de tinta é de: ", desperdicio_galao)
+    '''
 
 
 #print("Para pintar o(s) ", metros_pintar ," serão nescessários " , QUANTIDADE_LITROS_NECESSARIOS)
